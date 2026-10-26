@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeBeacon Dashboard</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f3f5fb;
+      color: #202944;
+    }
+    main { max-width: 850px; margin: auto; }
+    header {
+      background: #29265b;
+      color: white;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+    header h1 { margin: 0 0 8px; }
+    .note { font-size: 14px; opacity: .85; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 3px 12px #20294412;
+    }
+    .label { color: #667085; font-size: 14px; }
+    .value { font-size: 28px; font-weight: bold; margin: 12px 0; }
+    .status { color: #16804a; font-weight: bold; }
+    .alert {
+      background: #fff0e9;
+      color: #963d1d;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 18px;
+    }
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 13px 17px;
+      margin: 8px 8px 0 0;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .primary { background: #29265b; color: white; }
+    .secondary { background: #e6e8f4; color: #29265b; }
+    #eventLog { line-height: 1.8; }
+    footer { margin-top: 20px; color: #667085; font-size: 12px; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>💜 LifeBeacon</h1>
+    <div>Silent Sentinel · Elderly Safety Monitoring</div>
+    <p class="note">Prototype dashboard — demonstration data only</p>
+  </header>
+
+  <section class="grid">
+    <div class="card">
+      <div class="label">Heart Rate</div>
+      <div class="value" id="heart">72 bpm</div>
+      <div class="status">Demo reading</div>
+    </div>
+    <div class="card">
+      <div class="label">Temperature</div>
+      <div class="value" id="temp">36.5 °C</div>
+      <div class="status">Demo reading</div>
+    </div>
+    <div class="card">
+      <div class="label">Movement</div>
+      <div class="value" id="motion">Detected</div>
+      <div class="status">Demo sensor</div>
+    </div>
+    <div class="card">
+      <div class="label">Sound</div>
+      <div class="value" id="sound">Detected</div>
+      <div class="status">Demo sensor</div>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:18px">
+    <h2>System Status</h2>
+    <p id="systemStatus" class="status">DEMO: Normal</p>
+    <button class="primary" onclick="simulateSOS()">Simulate SOS Alert</button>
+    <button class="secondary" onclick="resetDemo()">Reset Demo</button>
+    <div id="alertBox" class="alert" role="status">
+      No simulated SOS alert active.
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:18px">
+    <h2>Event Log</h2>
+    <ul id="eventLog">
+      <li>Dashboard opened — demonstration mode.</li>
+    </ul>
+  </section>
+
+  <footer>
+    This dashboard uses sample data only. It is not connected to physical
+    sensors and does not contact emergency services. Not for medical use.
+  </footer>
+</main>
+
+<script>
+  function addEvent(message) {
+    const item = document.createElement("li");
+    item.textContent = new Date().toLocaleTimeString() + " — " + message;
+    document.getElementById("eventLog").prepend(item);
+  }
+
+  function simulateSOS() {
+    document.getElementById("systemStatus").textContent =
+      "DEMO: Possible SOS";
+    document.getElementById("systemStatus").style.color = "#b42318";
+    document.getElementById("alertBox").textContent =
+      "DEMO ALERT: Possible emergency flagged. Contact a trusted person in a real deployment.";
+    addEvent("Simulated SOS alert triggered.");
+  }
+
+  function resetDemo() {
+    document.getElementById("systemStatus").textContent = "DEMO: Normal";
+    document.getElementById("systemStatus").style.color = "#16804a";
+    document.getElementById("alertBox").textContent =
+      "No simulated SOS alert active.";
+    addEvent("Demo reset.");
+  }
+</script>
+</body>
+</html>
