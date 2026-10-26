@@ -22,5 +22,7 @@ if __name__ == "__main__":
         motion=0,
         sound=0
     )
+
     print("LifeBeacon Status:", result)
+    
   
